@@ -356,20 +356,20 @@ static BOOL _DTCoreTextLayoutFramesShouldDrawDebugFrames = NO;
                 {
                     runStrokeBounds.origin.y = roundf(runStrokeBounds.origin.y + oneRun.frame.size.height/2.0 + 1)+0.5;
                     
-                    CGContextMoveToPoint(context, runStrokeBounds.origin.x, runStrokeBounds.origin.y);
-                    CGContextAddLineToPoint(context, runStrokeBounds.origin.x + runStrokeBounds.size.width, runStrokeBounds.origin.y);
-                    
-                    CGContextStrokePath(context);
+                    CGRect line = CGRectMake(runStrokeBounds.origin.x, runStrokeBounds.origin.y,
+                                             runStrokeBounds.size.width, oneRun.descent * 0.25);
+                    CGContextAddRect(context, line);
+                    CGContextFillPath(context);
                 }
                 
                 if (drawUnderline)
                 {
                     runStrokeBounds.origin.y = roundf(runStrokeBounds.origin.y + oneRun.frame.size.height - oneRun.descent + 1)+0.5;
                     
-                    CGContextMoveToPoint(context, runStrokeBounds.origin.x, runStrokeBounds.origin.y);
-                    CGContextAddLineToPoint(context, runStrokeBounds.origin.x + runStrokeBounds.size.width, runStrokeBounds.origin.y);
-                    
-                    CGContextStrokePath(context);
+                    CGRect line = CGRectMake(runStrokeBounds.origin.x, runStrokeBounds.origin.y,
+                                             runStrokeBounds.size.width, oneRun.descent * 0.25);
+                    CGContextAddRect(context, line);
+                    CGContextFillPath(context);
                 }
             }
         }
